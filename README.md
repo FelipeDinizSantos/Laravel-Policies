@@ -1,1 +1,1 @@
-Projeto para de para estudo de policies em Laravel
+Projeto para estudo de policies em Laravel
