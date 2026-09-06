@@ -14,4 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [MainController::class, 'index'])->name('home');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/post-update/{post_id}', [MainController::class, 'editPost'])->name('post.edit');
+    Route::get('/post-delete/{post_id}', [MainController::class, 'deletePost'])->name('post.delete');
 });
