@@ -21,8 +21,8 @@ class MainController extends Controller
         $post = Post::find($id);
 
         if (!Auth::user()->can('update', $post)) {
-            // return redirect()->back();
             echo 'Usuário não pode atualizar este post!';
+            return;
         }
 
         echo 'Usuário pode atualizar este post!';
@@ -33,10 +33,20 @@ class MainController extends Controller
         $post = Post::find($id);
 
         if (!Auth::user()->can('delete', $post)) {
-            // return redirect()->back();
             echo 'Usuário não pode remover este post!';
+            return;
         }
 
         echo 'Usuário pode remover este post!';
+    }
+
+    public function create()
+    {
+        if (Auth::user()->can('create', Post::class)) {
+            echo 'Usuário pode criar um post!';
+            return;
+        }
+
+        echo 'Usuário pode não criar um post!';
     }
 }
