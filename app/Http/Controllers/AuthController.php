@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login_user(int $id): RedirectResponse 
+    public function login_user(int $id): RedirectResponse
     {
-        $user = User::find($id);
+        $user = User::with('permissions:permission')->find($id);
 
         Auth::login($user);
 
         return redirect()->route('home');
     }
 
-    public function logout(): RedirectResponse 
+    public function logout(): RedirectResponse
     {
         Auth::logout();
 

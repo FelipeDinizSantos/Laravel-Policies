@@ -29,8 +29,12 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->role !== 'visitor') return true;
-        return false;
+        // if ($user->role !== 'visitor') return true;
+        // return false;
+
+        // return $user->permissions()->where('permission', 'create_post')->exists();
+
+        return $user->permissions->contains('permission', 'create_post');
     }
 
     /**
@@ -38,7 +42,9 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return $user->role === 'admin' || $user->id === $post->user_id;
+        // return $user->role === 'admin' || $user->id === $post->user_id;
+
+        return $user->permissions->contains('permission', 'update_post');
     }
 
     /**
@@ -46,7 +52,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return $user->role === 'admin';
+        return $user->permissions->contains('permission', 'delete_post');
     }
 
     /**
